@@ -1,15 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'post.dart';
+import 'bottom_nav_bar.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
@@ -36,14 +36,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
       //   title: Text(widget.title),
       // ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -69,51 +68,63 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
               ],
             ),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 40, horizontal: 15),
-                    child: Container(
-                      decoration: new BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: new DecorationImage(
-                            image: new AssetImage("assets/background.png"),
-                            fit: BoxFit.cover,
-                          )),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(20, 60, 20, 30),
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text("Welcome back Jimu! 👋",
-                                  style: TextStyle(
-                                      fontSize: 22, fontWeight: FontWeight.w500)),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text("Check out the latest updates",
-                                  style: TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.w400)),
-                            ),
-                          ],
-                        ),
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 40, horizontal: 15),
+                  child: Container(
+                    decoration: new BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: new DecorationImage(
+                          image: new AssetImage("assets/background.png"),
+                          fit: BoxFit.cover,
+                        )),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(20, 60, 20, 30),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("Welcome back Jimu! 👋",
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.w500)),
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("Check out the latest updates",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w400)),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  Container(
-                    child: Post(),
-                  ),
-                  Container(
-                    child: Post(),
-                  ),
-                ],
-              )
+                ),
+                Container(
+                  child: Post(),
+                ),
+                Container(
+                  child: Post(),
+                ),
+              ],
             )
+
           ],
         ),
       ),
+      resizeToAvoidBottomInset: false,
+      bottomNavigationBar: ConvexAppBar(
+        items: [
+          TabItem(icon: Icons.home, ),
+          TabItem(icon: Icons.search,),
+          TabItem(icon: Icons.add, ),
+          TabItem(icon: Icons.inbox,),
+          TabItem(icon: Icons.people,),
+        ],
+        backgroundColor: Color(0xFF2E4756),
+        initialActiveIndex: 2,//optional, default as 0
+        onTap: (int i) => print('click index=$i'),
+      )
     );
   }
 }
