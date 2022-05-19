@@ -68,6 +68,8 @@ class Post extends StatelessWidget {
                   )
                 )
               ],
-            )));
+            )
+          )
+        );
   }
 }
